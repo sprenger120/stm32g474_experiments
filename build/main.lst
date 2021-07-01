@@ -1,0 +1,857 @@
+ARM GAS  /tmp/ccwk7aCg.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.SystemClock_Config,"ax",%progbits
+  18              		.align	1
+  19              		.global	SystemClock_Config
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	SystemClock_Config:
+  27              	.LFB133:
+  28              		.file 1 "Core/Src/main.c"
+   1:Core/Src/main.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/main.c **** /**
+   3:Core/Src/main.c ****   ******************************************************************************
+   4:Core/Src/main.c ****   * @file           : main.c
+   5:Core/Src/main.c ****   * @brief          : Main program body
+   6:Core/Src/main.c ****   ******************************************************************************
+   7:Core/Src/main.c ****   * @attention
+   8:Core/Src/main.c ****   *
+   9:Core/Src/main.c ****   * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+  10:Core/Src/main.c ****   * All rights reserved.</center></h2>
+  11:Core/Src/main.c ****   *
+  12:Core/Src/main.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  13:Core/Src/main.c ****   * the "License"; You may not use this file except in compliance with the
+  14:Core/Src/main.c ****   * License. You may obtain a copy of the License at:
+  15:Core/Src/main.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  16:Core/Src/main.c ****   *
+  17:Core/Src/main.c ****   ******************************************************************************
+  18:Core/Src/main.c ****   */
+  19:Core/Src/main.c **** /* USER CODE END Header */
+  20:Core/Src/main.c **** /* Includes ------------------------------------------------------------------*/
+  21:Core/Src/main.c **** #include "main.h"
+  22:Core/Src/main.c **** #include "dac.h"
+  23:Core/Src/main.c **** #include "dma.h"
+  24:Core/Src/main.c **** #include "usart.h"
+  25:Core/Src/main.c **** #include "tim.h"
+  26:Core/Src/main.c **** #include "gpio.h"
+  27:Core/Src/main.c **** 
+  28:Core/Src/main.c **** /* Private includes ----------------------------------------------------------*/
+  29:Core/Src/main.c **** /* USER CODE BEGIN Includes */
+  30:Core/Src/main.c **** #include <math.h>
+ARM GAS  /tmp/ccwk7aCg.s 			page 2
+
+
+  31:Core/Src/main.c **** /* USER CODE END Includes */
+  32:Core/Src/main.c **** 
+  33:Core/Src/main.c **** /* Private typedef -----------------------------------------------------------*/
+  34:Core/Src/main.c **** /* USER CODE BEGIN PTD */
+  35:Core/Src/main.c **** 
+  36:Core/Src/main.c **** /* USER CODE END PTD */
+  37:Core/Src/main.c **** 
+  38:Core/Src/main.c **** /* Private define ------------------------------------------------------------*/
+  39:Core/Src/main.c **** /* USER CODE BEGIN PD */
+  40:Core/Src/main.c **** /* USER CODE END PD */
+  41:Core/Src/main.c **** 
+  42:Core/Src/main.c **** /* Private macro -------------------------------------------------------------*/
+  43:Core/Src/main.c **** /* USER CODE BEGIN PM */
+  44:Core/Src/main.c **** 
+  45:Core/Src/main.c **** /* USER CODE END PM */
+  46:Core/Src/main.c **** 
+  47:Core/Src/main.c **** /* Private variables ---------------------------------------------------------*/
+  48:Core/Src/main.c **** 
+  49:Core/Src/main.c **** /* USER CODE BEGIN PV */
+  50:Core/Src/main.c **** 
+  51:Core/Src/main.c **** /* USER CODE END PV */
+  52:Core/Src/main.c **** 
+  53:Core/Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  54:Core/Src/main.c **** void SystemClock_Config(void);
+  55:Core/Src/main.c **** /* USER CODE BEGIN PFP */
+  56:Core/Src/main.c **** 
+  57:Core/Src/main.c **** /* USER CODE END PFP */
+  58:Core/Src/main.c **** 
+  59:Core/Src/main.c **** /* Private user code ---------------------------------------------------------*/
+  60:Core/Src/main.c **** /* USER CODE BEGIN 0 */
+  61:Core/Src/main.c **** 
+  62:Core/Src/main.c **** /* USER CODE END 0 */
+  63:Core/Src/main.c **** 
+  64:Core/Src/main.c **** /**
+  65:Core/Src/main.c ****   * @brief  The application entry point.
+  66:Core/Src/main.c ****   * @retval int
+  67:Core/Src/main.c ****   */
+  68:Core/Src/main.c **** int main(void)
+  69:Core/Src/main.c **** {
+  70:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
+  71:Core/Src/main.c **** 
+  72:Core/Src/main.c ****   /* USER CODE END 1 */
+  73:Core/Src/main.c **** 
+  74:Core/Src/main.c ****   /* MCU Configuration--------------------------------------------------------*/
+  75:Core/Src/main.c **** 
+  76:Core/Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  77:Core/Src/main.c ****   HAL_Init();
+  78:Core/Src/main.c **** 
+  79:Core/Src/main.c ****   /* USER CODE BEGIN Init */
+  80:Core/Src/main.c **** 
+  81:Core/Src/main.c ****   /* USER CODE END Init */
+  82:Core/Src/main.c **** 
+  83:Core/Src/main.c ****   /* Configure the system clock */
+  84:Core/Src/main.c ****   SystemClock_Config();
+  85:Core/Src/main.c **** 
+  86:Core/Src/main.c ****   /* USER CODE BEGIN SysInit */
+  87:Core/Src/main.c **** 
+ARM GAS  /tmp/ccwk7aCg.s 			page 3
+
+
+  88:Core/Src/main.c ****   /* USER CODE END SysInit */
+  89:Core/Src/main.c **** 
+  90:Core/Src/main.c ****   /* Initialize all configured peripherals */
+  91:Core/Src/main.c ****   MX_GPIO_Init();
+  92:Core/Src/main.c ****   MX_DMA_Init();
+  93:Core/Src/main.c ****   MX_DAC2_Init();
+  94:Core/Src/main.c ****   MX_LPUART1_UART_Init();
+  95:Core/Src/main.c ****   MX_TIM2_Init();
+  96:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+  97:Core/Src/main.c **** 
+  98:Core/Src/main.c ****   /* USER CODE END 2 */
+  99:Core/Src/main.c **** 
+ 100:Core/Src/main.c ****   /* Infinite loop */
+ 101:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
+ 102:Core/Src/main.c ****   
+ 103:Core/Src/main.c ****    #define SAMPLE_SIZE 1024
+ 104:Core/Src/main.c ****   float freq = 500;
+ 105:Core/Src/main.c ****   uint16_t audio[SAMPLE_SIZE] = {0};
+ 106:Core/Src/main.c **** 
+ 107:Core/Src/main.c ****   float angle = 0.0f;
+ 108:Core/Src/main.c ****   for (size_t i = 0; i<SAMPLE_SIZE; ++i) {
+ 109:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 110:Core/Src/main.c ****       audio[i] = (uint16_t)((sin(angle) * 4096.0f) / (2.0f * 3.14f));
+ 111:Core/Src/main.c ****     if (angle > 3.14*2) {
+ 112:Core/Src/main.c ****       angle = 0;
+ 113:Core/Src/main.c ****     }
+ 114:Core/Src/main.c ****   }
+ 115:Core/Src/main.c **** 
+ 116:Core/Src/main.c **** #define NS  128
+ 117:Core/Src/main.c **** 
+ 118:Core/Src/main.c ****  uint32_t Wave_LUT[NS] = {
+ 119:Core/Src/main.c ****     2048, 2149, 2250, 2350, 2450, 2549, 2646, 2742, 2837, 2929, 3020, 3108, 3193, 3275, 3355,
+ 120:Core/Src/main.c ****     3431, 3504, 3574, 3639, 3701, 3759, 3812, 3861, 3906, 3946, 3982, 4013, 4039, 4060, 4076,
+ 121:Core/Src/main.c ****     4087, 4094, 4095, 4091, 4082, 4069, 4050, 4026, 3998, 3965, 3927, 3884, 3837, 3786, 3730,
+ 122:Core/Src/main.c ****     3671, 3607, 3539, 3468, 3394, 3316, 3235, 3151, 3064, 2975, 2883, 2790, 2695, 2598, 2500,
+ 123:Core/Src/main.c ****     2400, 2300, 2199, 2098, 1997, 1896, 1795, 1695, 1595, 1497, 1400, 1305, 1212, 1120, 1031,
+ 124:Core/Src/main.c ****     944, 860, 779, 701, 627, 556, 488, 424, 365, 309, 258, 211, 168, 130, 97,
+ 125:Core/Src/main.c ****     69, 45, 26, 13, 4, 0, 1, 8, 19, 35, 56, 82, 113, 149, 189,
+ 126:Core/Src/main.c ****     234, 283, 336, 394, 456, 521, 591, 664, 740, 820, 902, 987, 1075, 1166, 1258,
+ 127:Core/Src/main.c ****     1353, 1449, 1546, 1645, 1745, 1845, 1946, 2047
+ 128:Core/Src/main.c **** };  
+ 129:Core/Src/main.c **** 
+ 130:Core/Src/main.c ****   
+ 131:Core/Src/main.c ****  
+ 132:Core/Src/main.c ****   //HAL_DAC_Start(&hdac2, DAC_CHANNEL_1);  
+ 133:Core/Src/main.c ****   HAL_TIM_Base_Start(&htim2);
+ 134:Core/Src/main.c ****   HAL_DAC_Start_DMA(&hdac2, DAC_CHANNEL_1, (uint32_t*)Wave_LUT, NS, DAC_ALIGN_12B_R);
+ 135:Core/Src/main.c ****   
+ 136:Core/Src/main.c **** 
+ 137:Core/Src/main.c ****   while (1)
+ 138:Core/Src/main.c ****   {
+ 139:Core/Src/main.c **** 
+ 140:Core/Src/main.c ****     //volatile HAL_StatusTypeDef res = HAL_DAC_Start_DMA(&hdac2, DAC_CHANNEL_1, (uint32_t*)audio, S
+ 141:Core/Src/main.c **** 
+ 142:Core/Src/main.c ****     //__asm("bkpt");
+ 143:Core/Src/main.c ****     for (int i = 0;i<32;++i) {
+ 144:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ARM GAS  /tmp/ccwk7aCg.s 			page 4
+
+
+ 145:Core/Src/main.c **** 
+ 146:Core/Src/main.c ****       for(uint64_t i = 0; i< 1700; i++) {
+ 147:Core/Src/main.c ****         __asm("nop");
+ 148:Core/Src/main.c ****       }
+ 149:Core/Src/main.c ****   }
+ 150:Core/Src/main.c ****     /* USER CODE END WHILE */
+ 151:Core/Src/main.c **** 
+ 152:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
+ 153:Core/Src/main.c ****   }
+ 154:Core/Src/main.c ****   /* USER CODE END 3 */
+ 155:Core/Src/main.c **** }
+ 156:Core/Src/main.c **** 
+ 157:Core/Src/main.c **** /**
+ 158:Core/Src/main.c ****   * @brief System Clock Configuration
+ 159:Core/Src/main.c ****   * @retval None
+ 160:Core/Src/main.c ****   */
+ 161:Core/Src/main.c **** void SystemClock_Config(void)
+ 162:Core/Src/main.c **** {
+  29              		.loc 1 162 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 160
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 30B5     		push	{r4, r5, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+  39 0002 A9B0     		sub	sp, sp, #164
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 176
+ 163:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  42              		.loc 1 163 3 view .LVU1
+  43              		.loc 1 163 22 is_stmt 0 view .LVU2
+  44 0004 3822     		movs	r2, #56
+  45 0006 0021     		movs	r1, #0
+  46 0008 1AA8     		add	r0, sp, #104
+  47 000a FFF7FEFF 		bl	memset
+  48              	.LVL0:
+ 164:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  49              		.loc 1 164 3 is_stmt 1 view .LVU3
+  50              		.loc 1 164 22 is_stmt 0 view .LVU4
+  51 000e 0024     		movs	r4, #0
+  52 0010 1594     		str	r4, [sp, #84]
+  53 0012 1694     		str	r4, [sp, #88]
+  54 0014 1794     		str	r4, [sp, #92]
+  55 0016 1894     		str	r4, [sp, #96]
+  56 0018 1994     		str	r4, [sp, #100]
+ 165:Core/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  57              		.loc 1 165 3 is_stmt 1 view .LVU5
+  58              		.loc 1 165 28 is_stmt 0 view .LVU6
+  59 001a 5422     		movs	r2, #84
+  60 001c 2146     		mov	r1, r4
+  61 001e 6846     		mov	r0, sp
+  62 0020 FFF7FEFF 		bl	memset
+  63              	.LVL1:
+ 166:Core/Src/main.c **** 
+ARM GAS  /tmp/ccwk7aCg.s 			page 5
+
+
+ 167:Core/Src/main.c ****   /** Configure the main internal regulator output voltage
+ 168:Core/Src/main.c ****   */
+ 169:Core/Src/main.c ****   HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST);
+  64              		.loc 1 169 3 is_stmt 1 view .LVU7
+  65 0024 2046     		mov	r0, r4
+  66 0026 FFF7FEFF 		bl	HAL_PWREx_ControlVoltageScaling
+  67              	.LVL2:
+ 170:Core/Src/main.c ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 171:Core/Src/main.c ****   * in the RCC_OscInitTypeDef structure.
+ 172:Core/Src/main.c ****   */
+ 173:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  68              		.loc 1 173 3 view .LVU8
+  69              		.loc 1 173 36 is_stmt 0 view .LVU9
+  70 002a 0123     		movs	r3, #1
+  71 002c 1A93     		str	r3, [sp, #104]
+ 174:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  72              		.loc 1 174 3 is_stmt 1 view .LVU10
+  73              		.loc 1 174 30 is_stmt 0 view .LVU11
+  74 002e 4FF48033 		mov	r3, #65536
+  75 0032 1B93     		str	r3, [sp, #108]
+ 175:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  76              		.loc 1 175 3 is_stmt 1 view .LVU12
+  77              		.loc 1 175 34 is_stmt 0 view .LVU13
+  78 0034 0223     		movs	r3, #2
+  79 0036 2193     		str	r3, [sp, #132]
+ 176:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  80              		.loc 1 176 3 is_stmt 1 view .LVU14
+  81              		.loc 1 176 35 is_stmt 0 view .LVU15
+  82 0038 0325     		movs	r5, #3
+  83 003a 2295     		str	r5, [sp, #136]
+ 177:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV6;
+  84              		.loc 1 177 3 is_stmt 1 view .LVU16
+  85              		.loc 1 177 30 is_stmt 0 view .LVU17
+  86 003c 0622     		movs	r2, #6
+  87 003e 2392     		str	r2, [sp, #140]
+ 178:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLN = 85;
+  88              		.loc 1 178 3 is_stmt 1 view .LVU18
+  89              		.loc 1 178 30 is_stmt 0 view .LVU19
+  90 0040 5522     		movs	r2, #85
+  91 0042 2492     		str	r2, [sp, #144]
+ 179:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  92              		.loc 1 179 3 is_stmt 1 view .LVU20
+  93              		.loc 1 179 30 is_stmt 0 view .LVU21
+  94 0044 2593     		str	r3, [sp, #148]
+ 180:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  95              		.loc 1 180 3 is_stmt 1 view .LVU22
+  96              		.loc 1 180 30 is_stmt 0 view .LVU23
+  97 0046 2693     		str	r3, [sp, #152]
+ 181:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+  98              		.loc 1 181 3 is_stmt 1 view .LVU24
+  99              		.loc 1 181 30 is_stmt 0 view .LVU25
+ 100 0048 2793     		str	r3, [sp, #156]
+ 182:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 101              		.loc 1 182 3 is_stmt 1 view .LVU26
+ 102              		.loc 1 182 7 is_stmt 0 view .LVU27
+ 103 004a 1AA8     		add	r0, sp, #104
+ 104 004c FFF7FEFF 		bl	HAL_RCC_OscConfig
+ARM GAS  /tmp/ccwk7aCg.s 			page 6
+
+
+ 105              	.LVL3:
+ 183:Core/Src/main.c ****   {
+ 184:Core/Src/main.c ****     Error_Handler();
+ 185:Core/Src/main.c ****   }
+ 186:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
+ 187:Core/Src/main.c ****   */
+ 188:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 106              		.loc 1 188 3 is_stmt 1 view .LVU28
+ 107              		.loc 1 188 31 is_stmt 0 view .LVU29
+ 108 0050 0F23     		movs	r3, #15
+ 109 0052 1593     		str	r3, [sp, #84]
+ 189:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 190:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 110              		.loc 1 190 3 is_stmt 1 view .LVU30
+ 111              		.loc 1 190 34 is_stmt 0 view .LVU31
+ 112 0054 1695     		str	r5, [sp, #88]
+ 191:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 113              		.loc 1 191 3 is_stmt 1 view .LVU32
+ 114              		.loc 1 191 35 is_stmt 0 view .LVU33
+ 115 0056 1794     		str	r4, [sp, #92]
+ 192:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 116              		.loc 1 192 3 is_stmt 1 view .LVU34
+ 117              		.loc 1 192 36 is_stmt 0 view .LVU35
+ 118 0058 1894     		str	r4, [sp, #96]
+ 193:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 119              		.loc 1 193 3 is_stmt 1 view .LVU36
+ 120              		.loc 1 193 36 is_stmt 0 view .LVU37
+ 121 005a 1994     		str	r4, [sp, #100]
+ 194:Core/Src/main.c **** 
+ 195:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+ 122              		.loc 1 195 3 is_stmt 1 view .LVU38
+ 123              		.loc 1 195 7 is_stmt 0 view .LVU39
+ 124 005c 0421     		movs	r1, #4
+ 125 005e 15A8     		add	r0, sp, #84
+ 126 0060 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 127              	.LVL4:
+ 196:Core/Src/main.c ****   {
+ 197:Core/Src/main.c ****     Error_Handler();
+ 198:Core/Src/main.c ****   }
+ 199:Core/Src/main.c ****   /** Initializes the peripherals clocks
+ 200:Core/Src/main.c ****   */
+ 201:Core/Src/main.c ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_LPUART1;
+ 128              		.loc 1 201 3 is_stmt 1 view .LVU40
+ 129              		.loc 1 201 38 is_stmt 0 view .LVU41
+ 130 0064 2023     		movs	r3, #32
+ 131 0066 0093     		str	r3, [sp]
+ 202:Core/Src/main.c ****   PeriphClkInit.Lpuart1ClockSelection = RCC_LPUART1CLKSOURCE_PCLK1;
+ 132              		.loc 1 202 3 is_stmt 1 view .LVU42
+ 133              		.loc 1 202 39 is_stmt 0 view .LVU43
+ 134 0068 0694     		str	r4, [sp, #24]
+ 203:Core/Src/main.c ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+ 135              		.loc 1 203 3 is_stmt 1 view .LVU44
+ 136              		.loc 1 203 7 is_stmt 0 view .LVU45
+ 137 006a 6846     		mov	r0, sp
+ 138 006c FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 139              	.LVL5:
+ 204:Core/Src/main.c ****   {
+ARM GAS  /tmp/ccwk7aCg.s 			page 7
+
+
+ 205:Core/Src/main.c ****     Error_Handler();
+ 206:Core/Src/main.c ****   }
+ 207:Core/Src/main.c **** }
+ 140              		.loc 1 207 1 view .LVU46
+ 141 0070 29B0     		add	sp, sp, #164
+ 142              	.LCFI2:
+ 143              		.cfi_def_cfa_offset 12
+ 144              		@ sp needed
+ 145 0072 30BD     		pop	{r4, r5, pc}
+ 146              		.cfi_endproc
+ 147              	.LFE133:
+ 149              		.global	__aeabi_f2d
+ 150              		.global	__aeabi_dadd
+ 151              		.global	__aeabi_d2f
+ 152              		.global	__aeabi_dcmpgt
+ 153              		.section	.text.main,"ax",%progbits
+ 154              		.align	1
+ 155              		.global	main
+ 156              		.syntax unified
+ 157              		.thumb
+ 158              		.thumb_func
+ 159              		.fpu fpv4-sp-d16
+ 161              	main:
+ 162              	.LFB132:
+  69:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
+ 163              		.loc 1 69 1 is_stmt 1 view -0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 512
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 30B5     		push	{r4, r5, lr}
+ 168              	.LCFI3:
+ 169              		.cfi_def_cfa_offset 12
+ 170              		.cfi_offset 4, -12
+ 171              		.cfi_offset 5, -8
+ 172              		.cfi_offset 14, -4
+ 173 0002 ADF5037D 		sub	sp, sp, #524
+ 174              	.LCFI4:
+ 175              		.cfi_def_cfa_offset 536
+  77:Core/Src/main.c **** 
+ 176              		.loc 1 77 3 view .LVU48
+ 177 0006 FFF7FEFF 		bl	HAL_Init
+ 178              	.LVL6:
+  84:Core/Src/main.c **** 
+ 179              		.loc 1 84 3 view .LVU49
+ 180 000a FFF7FEFF 		bl	SystemClock_Config
+ 181              	.LVL7:
+  91:Core/Src/main.c ****   MX_DMA_Init();
+ 182              		.loc 1 91 3 view .LVU50
+ 183 000e FFF7FEFF 		bl	MX_GPIO_Init
+ 184              	.LVL8:
+  92:Core/Src/main.c ****   MX_DAC2_Init();
+ 185              		.loc 1 92 3 view .LVU51
+ 186 0012 FFF7FEFF 		bl	MX_DMA_Init
+ 187              	.LVL9:
+  93:Core/Src/main.c ****   MX_LPUART1_UART_Init();
+ 188              		.loc 1 93 3 view .LVU52
+ 189 0016 FFF7FEFF 		bl	MX_DAC2_Init
+ARM GAS  /tmp/ccwk7aCg.s 			page 8
+
+
+ 190              	.LVL10:
+  94:Core/Src/main.c ****   MX_TIM2_Init();
+ 191              		.loc 1 94 3 view .LVU53
+ 192 001a FFF7FEFF 		bl	MX_LPUART1_UART_Init
+ 193              	.LVL11:
+  95:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ 194              		.loc 1 95 3 view .LVU54
+ 195 001e FFF7FEFF 		bl	MX_TIM2_Init
+ 196              	.LVL12:
+ 104:Core/Src/main.c ****   uint16_t audio[SAMPLE_SIZE] = {0};
+ 197              		.loc 1 104 3 view .LVU55
+ 105:Core/Src/main.c **** 
+ 198              		.loc 1 105 3 view .LVU56
+ 107:Core/Src/main.c ****   for (size_t i = 0; i<SAMPLE_SIZE; ++i) {
+ 199              		.loc 1 107 3 view .LVU57
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 200              		.loc 1 108 3 view .LVU58
+ 201              	.LBB2:
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 202              		.loc 1 108 8 view .LVU59
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 203              		.loc 1 108 15 is_stmt 0 view .LVU60
+ 204 0022 0025     		movs	r5, #0
+ 205              	.LBE2:
+ 107:Core/Src/main.c ****   for (size_t i = 0; i<SAMPLE_SIZE; ++i) {
+ 206              		.loc 1 107 9 view .LVU61
+ 207 0024 0024     		movs	r4, #0
+ 208              	.LBB3:
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 209              		.loc 1 108 3 view .LVU62
+ 210 0026 00E0     		b	.L4
+ 211              	.LVL13:
+ 212              	.L5:
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 213              		.loc 1 108 37 is_stmt 1 discriminator 2 view .LVU63
+ 214 0028 0135     		adds	r5, r5, #1
+ 215              	.LVL14:
+ 216              	.L4:
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 217              		.loc 1 108 22 discriminator 1 view .LVU64
+ 108:Core/Src/main.c ****       angle += 3.14 / 1000.0;
+ 218              		.loc 1 108 3 is_stmt 0 discriminator 1 view .LVU65
+ 219 002a B5F5806F 		cmp	r5, #1024
+ 220 002e 15D2     		bcs	.L14
+ 109:Core/Src/main.c ****       audio[i] = (uint16_t)((sin(angle) * 4096.0f) / (2.0f * 3.14f));
+ 221              		.loc 1 109 7 is_stmt 1 view .LVU66
+ 109:Core/Src/main.c ****       audio[i] = (uint16_t)((sin(angle) * 4096.0f) / (2.0f * 3.14f));
+ 222              		.loc 1 109 13 is_stmt 0 view .LVU67
+ 223 0030 2046     		mov	r0, r4	@ float
+ 224 0032 FFF7FEFF 		bl	__aeabi_f2d
+ 225              	.LVL15:
+ 226 0036 1FA3     		adr	r3, .L16+12
+ 227 0038 D3E90023 		ldrd	r2, [r3]
+ 228 003c FFF7FEFF 		bl	__aeabi_dadd
+ 229              	.LVL16:
+ 230 0040 FFF7FEFF 		bl	__aeabi_d2f
+ 231              	.LVL17:
+ARM GAS  /tmp/ccwk7aCg.s 			page 9
+
+
+ 232 0044 0446     		mov	r4, r0	@ float
+ 233              	.LVL18:
+ 110:Core/Src/main.c ****     if (angle > 3.14*2) {
+ 234              		.loc 1 110 7 is_stmt 1 view .LVU68
+ 110:Core/Src/main.c ****     if (angle > 3.14*2) {
+ 235              		.loc 1 110 30 is_stmt 0 view .LVU69
+ 236 0046 FFF7FEFF 		bl	__aeabi_f2d
+ 237              	.LVL19:
+ 111:Core/Src/main.c ****       angle = 0;
+ 238              		.loc 1 111 5 is_stmt 1 view .LVU70
+ 111:Core/Src/main.c ****       angle = 0;
+ 239              		.loc 1 111 8 is_stmt 0 view .LVU71
+ 240 004a 1CA3     		adr	r3, .L16+20
+ 241 004c D3E90023 		ldrd	r2, [r3]
+ 242 0050 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 243              	.LVL20:
+ 244 0054 0028     		cmp	r0, #0
+ 245 0056 E7D0     		beq	.L5
+ 112:Core/Src/main.c ****     }
+ 246              		.loc 1 112 13 view .LVU72
+ 247 0058 0024     		movs	r4, #0
+ 248              	.LVL21:
+ 112:Core/Src/main.c ****     }
+ 249              		.loc 1 112 13 view .LVU73
+ 250 005a E5E7     		b	.L5
+ 251              	.LVL22:
+ 252              	.L14:
+ 112:Core/Src/main.c ****     }
+ 253              		.loc 1 112 13 view .LVU74
+ 254              	.LBE3:
+ 118:Core/Src/main.c ****     2048, 2149, 2250, 2350, 2450, 2549, 2646, 2742, 2837, 2929, 3020, 3108, 3193, 3275, 3355,
+ 255              		.loc 1 118 2 is_stmt 1 view .LVU75
+ 118:Core/Src/main.c ****     2048, 2149, 2250, 2350, 2450, 2549, 2646, 2742, 2837, 2929, 3020, 3108, 3193, 3275, 3355,
+ 256              		.loc 1 118 11 is_stmt 0 view .LVU76
+ 257 005c 4FF40072 		mov	r2, #512
+ 258 0060 1149     		ldr	r1, .L16
+ 259 0062 02A8     		add	r0, sp, #8
+ 260 0064 FFF7FEFF 		bl	memcpy
+ 261              	.LVL23:
+ 133:Core/Src/main.c ****   HAL_DAC_Start_DMA(&hdac2, DAC_CHANNEL_1, (uint32_t*)Wave_LUT, NS, DAC_ALIGN_12B_R);
+ 262              		.loc 1 133 3 is_stmt 1 view .LVU77
+ 263 0068 1048     		ldr	r0, .L16+4
+ 264 006a FFF7FEFF 		bl	HAL_TIM_Base_Start
+ 265              	.LVL24:
+ 134:Core/Src/main.c ****   
+ 266              		.loc 1 134 3 view .LVU78
+ 267 006e 0021     		movs	r1, #0
+ 268 0070 0091     		str	r1, [sp]
+ 269 0072 8023     		movs	r3, #128
+ 270 0074 02AA     		add	r2, sp, #8
+ 271 0076 0E48     		ldr	r0, .L16+8
+ 272 0078 FFF7FEFF 		bl	HAL_DAC_Start_DMA
+ 273              	.LVL25:
+ 274              	.L10:
+ 137:Core/Src/main.c ****   {
+ 275              		.loc 1 137 3 view .LVU79
+ 143:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ARM GAS  /tmp/ccwk7aCg.s 			page 10
+
+
+ 276              		.loc 1 143 5 view .LVU80
+ 277              	.LBB4:
+ 143:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ 278              		.loc 1 143 10 view .LVU81
+ 143:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ 279              		.loc 1 143 14 is_stmt 0 view .LVU82
+ 280 007c 0024     		movs	r4, #0
+ 281 007e 00E0     		b	.L7
+ 282              	.LVL26:
+ 283              	.L15:
+ 143:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ 284              		.loc 1 143 25 is_stmt 1 discriminator 2 view .LVU83
+ 285 0080 0134     		adds	r4, r4, #1
+ 286              	.LVL27:
+ 287              	.L7:
+ 143:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ 288              		.loc 1 143 20 discriminator 1 view .LVU84
+ 143:Core/Src/main.c ****       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
+ 289              		.loc 1 143 5 is_stmt 0 discriminator 1 view .LVU85
+ 290 0082 1F2C     		cmp	r4, #31
+ 291 0084 FADC     		bgt	.L10
+ 292              	.LBB5:
+ 146:Core/Src/main.c ****         __asm("nop");
+ 293              		.loc 1 146 20 view .LVU86
+ 294 0086 0022     		movs	r2, #0
+ 295 0088 0023     		movs	r3, #0
+ 296              	.L9:
+ 297              	.LVL28:
+ 146:Core/Src/main.c ****         __asm("nop");
+ 298              		.loc 1 146 27 is_stmt 1 discriminator 1 view .LVU87
+ 146:Core/Src/main.c ****         __asm("nop");
+ 299              		.loc 1 146 7 is_stmt 0 discriminator 1 view .LVU88
+ 300 008a 40F2A360 		movw	r0, #1699
+ 301 008e 0021     		movs	r1, #0
+ 302 0090 9942     		cmp	r1, r3
+ 303 0092 08BF     		it	eq
+ 304 0094 9042     		cmpeq	r0, r2
+ 305 0096 F3D3     		bcc	.L15
+ 147:Core/Src/main.c ****       }
+ 306              		.loc 1 147 9 is_stmt 1 discriminator 3 view .LVU89
+ 307              		.syntax unified
+ 308              	@ 147 "Core/Src/main.c" 1
+ 309 0098 00BF     		nop
+ 310              	@ 0 "" 2
+ 146:Core/Src/main.c ****         __asm("nop");
+ 311              		.loc 1 146 36 discriminator 3 view .LVU90
+ 146:Core/Src/main.c ****         __asm("nop");
+ 312              		.loc 1 146 37 is_stmt 0 discriminator 3 view .LVU91
+ 313              		.thumb
+ 314              		.syntax unified
+ 315 009a 0132     		adds	r2, r2, #1
+ 316              	.LVL29:
+ 146:Core/Src/main.c ****         __asm("nop");
+ 317              		.loc 1 146 37 discriminator 3 view .LVU92
+ 318 009c 43F10003 		adc	r3, r3, #0
+ 319              	.LVL30:
+ 146:Core/Src/main.c ****         __asm("nop");
+ARM GAS  /tmp/ccwk7aCg.s 			page 11
+
+
+ 320              		.loc 1 146 37 discriminator 3 view .LVU93
+ 321 00a0 F3E7     		b	.L9
+ 322              	.L17:
+ 323 00a2 00BFAFF3 		.align	3
+ 323      0080
+ 324              	.L16:
+ 325 00a8 00000000 		.word	.LANCHOR0
+ 326 00ac 00000000 		.word	htim2
+ 327 00b0 00000000 		.word	hdac2
+ 328 00b4 B7EEE6A9 		.word	2850483895
+ 329 00b8 0EB9693F 		.word	1063893262
+ 330 00bc 1F85EB51 		.word	1374389535
+ 331 00c0 B81E1940 		.word	1075388088
+ 332              	.LBE5:
+ 333              	.LBE4:
+ 334              		.cfi_endproc
+ 335              	.LFE132:
+ 337              		.section	.text.Error_Handler,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	Error_Handler
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.fpu fpv4-sp-d16
+ 345              	Error_Handler:
+ 346              	.LFB134:
+ 208:Core/Src/main.c **** 
+ 209:Core/Src/main.c **** /* USER CODE BEGIN 4 */
+ 210:Core/Src/main.c **** 
+ 211:Core/Src/main.c **** /* USER CODE END 4 */
+ 212:Core/Src/main.c **** 
+ 213:Core/Src/main.c **** /**
+ 214:Core/Src/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 215:Core/Src/main.c ****   * @retval None
+ 216:Core/Src/main.c ****   */
+ 217:Core/Src/main.c **** void Error_Handler(void)
+ 218:Core/Src/main.c **** {
+ 347              		.loc 1 218 1 is_stmt 1 view -0
+ 348              		.cfi_startproc
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 351              		@ link register save eliminated.
+ 219:Core/Src/main.c ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 220:Core/Src/main.c ****   /* User can add his own implementation to report the HAL error return state */
+ 221:Core/Src/main.c **** 
+ 222:Core/Src/main.c ****   /* USER CODE END Error_Handler_Debug */
+ 223:Core/Src/main.c **** }
+ 352              		.loc 1 223 1 view .LVU95
+ 353 0000 7047     		bx	lr
+ 354              		.cfi_endproc
+ 355              	.LFE134:
+ 357              		.section	.rodata
+ 358              		.align	2
+ 359              		.set	.LANCHOR0,. + 0
+ 360              	.LC0:
+ 361 0000 00080000 		.word	2048
+ 362 0004 65080000 		.word	2149
+ARM GAS  /tmp/ccwk7aCg.s 			page 12
+
+
+ 363 0008 CA080000 		.word	2250
+ 364 000c 2E090000 		.word	2350
+ 365 0010 92090000 		.word	2450
+ 366 0014 F5090000 		.word	2549
+ 367 0018 560A0000 		.word	2646
+ 368 001c B60A0000 		.word	2742
+ 369 0020 150B0000 		.word	2837
+ 370 0024 710B0000 		.word	2929
+ 371 0028 CC0B0000 		.word	3020
+ 372 002c 240C0000 		.word	3108
+ 373 0030 790C0000 		.word	3193
+ 374 0034 CB0C0000 		.word	3275
+ 375 0038 1B0D0000 		.word	3355
+ 376 003c 670D0000 		.word	3431
+ 377 0040 B00D0000 		.word	3504
+ 378 0044 F60D0000 		.word	3574
+ 379 0048 370E0000 		.word	3639
+ 380 004c 750E0000 		.word	3701
+ 381 0050 AF0E0000 		.word	3759
+ 382 0054 E40E0000 		.word	3812
+ 383 0058 150F0000 		.word	3861
+ 384 005c 420F0000 		.word	3906
+ 385 0060 6A0F0000 		.word	3946
+ 386 0064 8E0F0000 		.word	3982
+ 387 0068 AD0F0000 		.word	4013
+ 388 006c C70F0000 		.word	4039
+ 389 0070 DC0F0000 		.word	4060
+ 390 0074 EC0F0000 		.word	4076
+ 391 0078 F70F0000 		.word	4087
+ 392 007c FE0F0000 		.word	4094
+ 393 0080 FF0F0000 		.word	4095
+ 394 0084 FB0F0000 		.word	4091
+ 395 0088 F20F0000 		.word	4082
+ 396 008c E50F0000 		.word	4069
+ 397 0090 D20F0000 		.word	4050
+ 398 0094 BA0F0000 		.word	4026
+ 399 0098 9E0F0000 		.word	3998
+ 400 009c 7D0F0000 		.word	3965
+ 401 00a0 570F0000 		.word	3927
+ 402 00a4 2C0F0000 		.word	3884
+ 403 00a8 FD0E0000 		.word	3837
+ 404 00ac CA0E0000 		.word	3786
+ 405 00b0 920E0000 		.word	3730
+ 406 00b4 570E0000 		.word	3671
+ 407 00b8 170E0000 		.word	3607
+ 408 00bc D30D0000 		.word	3539
+ 409 00c0 8C0D0000 		.word	3468
+ 410 00c4 420D0000 		.word	3394
+ 411 00c8 F40C0000 		.word	3316
+ 412 00cc A30C0000 		.word	3235
+ 413 00d0 4F0C0000 		.word	3151
+ 414 00d4 F80B0000 		.word	3064
+ 415 00d8 9F0B0000 		.word	2975
+ 416 00dc 430B0000 		.word	2883
+ 417 00e0 E60A0000 		.word	2790
+ 418 00e4 870A0000 		.word	2695
+ 419 00e8 260A0000 		.word	2598
+ARM GAS  /tmp/ccwk7aCg.s 			page 13
+
+
+ 420 00ec C4090000 		.word	2500
+ 421 00f0 60090000 		.word	2400
+ 422 00f4 FC080000 		.word	2300
+ 423 00f8 97080000 		.word	2199
+ 424 00fc 32080000 		.word	2098
+ 425 0100 CD070000 		.word	1997
+ 426 0104 68070000 		.word	1896
+ 427 0108 03070000 		.word	1795
+ 428 010c 9F060000 		.word	1695
+ 429 0110 3B060000 		.word	1595
+ 430 0114 D9050000 		.word	1497
+ 431 0118 78050000 		.word	1400
+ 432 011c 19050000 		.word	1305
+ 433 0120 BC040000 		.word	1212
+ 434 0124 60040000 		.word	1120
+ 435 0128 07040000 		.word	1031
+ 436 012c B0030000 		.word	944
+ 437 0130 5C030000 		.word	860
+ 438 0134 0B030000 		.word	779
+ 439 0138 BD020000 		.word	701
+ 440 013c 73020000 		.word	627
+ 441 0140 2C020000 		.word	556
+ 442 0144 E8010000 		.word	488
+ 443 0148 A8010000 		.word	424
+ 444 014c 6D010000 		.word	365
+ 445 0150 35010000 		.word	309
+ 446 0154 02010000 		.word	258
+ 447 0158 D3000000 		.word	211
+ 448 015c A8000000 		.word	168
+ 449 0160 82000000 		.word	130
+ 450 0164 61000000 		.word	97
+ 451 0168 45000000 		.word	69
+ 452 016c 2D000000 		.word	45
+ 453 0170 1A000000 		.word	26
+ 454 0174 0D000000 		.word	13
+ 455 0178 04000000 		.word	4
+ 456 017c 00000000 		.word	0
+ 457 0180 01000000 		.word	1
+ 458 0184 08000000 		.word	8
+ 459 0188 13000000 		.word	19
+ 460 018c 23000000 		.word	35
+ 461 0190 38000000 		.word	56
+ 462 0194 52000000 		.word	82
+ 463 0198 71000000 		.word	113
+ 464 019c 95000000 		.word	149
+ 465 01a0 BD000000 		.word	189
+ 466 01a4 EA000000 		.word	234
+ 467 01a8 1B010000 		.word	283
+ 468 01ac 50010000 		.word	336
+ 469 01b0 8A010000 		.word	394
+ 470 01b4 C8010000 		.word	456
+ 471 01b8 09020000 		.word	521
+ 472 01bc 4F020000 		.word	591
+ 473 01c0 98020000 		.word	664
+ 474 01c4 E4020000 		.word	740
+ 475 01c8 34030000 		.word	820
+ 476 01cc 86030000 		.word	902
+ARM GAS  /tmp/ccwk7aCg.s 			page 14
+
+
+ 477 01d0 DB030000 		.word	987
+ 478 01d4 33040000 		.word	1075
+ 479 01d8 8E040000 		.word	1166
+ 480 01dc EA040000 		.word	1258
+ 481 01e0 49050000 		.word	1353
+ 482 01e4 A9050000 		.word	1449
+ 483 01e8 0A060000 		.word	1546
+ 484 01ec 6D060000 		.word	1645
+ 485 01f0 D1060000 		.word	1745
+ 486 01f4 35070000 		.word	1845
+ 487 01f8 9A070000 		.word	1946
+ 488 01fc FF070000 		.word	2047
+ 489              		.text
+ 490              	.Letext0:
+ 491              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 492              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 493              		.file 4 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
+ 494              		.file 5 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g474xx.h"
+ 495              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 496              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 497              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h"
+ 498              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc_ex.h"
+ 499              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dma.h"
+ 500              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_dac.h"
+ 501              		.file 12 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
+ 502              		.file 13 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h"
+ 503              		.file 14 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h"
+ 504              		.file 15 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ 505              		.file 16 "Core/Inc/dac.h"
+ 506              		.file 17 "Core/Inc/usart.h"
+ 507              		.file 18 "Core/Inc/tim.h"
+ 508              		.file 19 "/usr/include/newlib/sys/_types.h"
+ 509              		.file 20 "/usr/include/newlib/sys/reent.h"
+ 510              		.file 21 "/usr/include/newlib/sys/lock.h"
+ 511              		.file 22 "/usr/include/newlib/math.h"
+ 512              		.file 23 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h"
+ 513              		.file 24 "Core/Inc/gpio.h"
+ 514              		.file 25 "Core/Inc/dma.h"
+ 515              		.file 26 "<built-in>"
+ARM GAS  /tmp/ccwk7aCg.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/ccwk7aCg.s:18     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccwk7aCg.s:26     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccwk7aCg.s:154    .text.main:0000000000000000 $t
+     /tmp/ccwk7aCg.s:161    .text.main:0000000000000000 main
+     /tmp/ccwk7aCg.s:325    .text.main:00000000000000a8 $d
+     /tmp/ccwk7aCg.s:338    .text.Error_Handler:0000000000000000 $t
+     /tmp/ccwk7aCg.s:345    .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/ccwk7aCg.s:358    .rodata:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+memset
+HAL_PWREx_ControlVoltageScaling
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCCEx_PeriphCLKConfig
+__aeabi_f2d
+__aeabi_dadd
+__aeabi_d2f
+__aeabi_dcmpgt
+HAL_Init
+MX_GPIO_Init
+MX_DMA_Init
+MX_DAC2_Init
+MX_LPUART1_UART_Init
+MX_TIM2_Init
+memcpy
+HAL_TIM_Base_Start
+HAL_DAC_Start_DMA
+htim2
+hdac2
