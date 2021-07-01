@@ -63,7 +63,8 @@ Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c \
 Core/Src/system_stm32g4xx.c \
 Core/Src/tim.c \
-Core/Src/dma.c
+Core/Src/dma.c \
+audio_clip.c
 
 # ASM sources
 ASM_SOURCES =  \
