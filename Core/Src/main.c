@@ -28,6 +28,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <math.h>
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -183,14 +184,14 @@ int main(void)
   //HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
 
   HAL_TIM_PWM_Start_DMA(&htim3, TIM_CHANNEL_4, (uint32_t *)pwm_lut, pwm_lut_count);
-
+  bool flip = false;
   while (1)
   {
 
     //volatile HAL_StatusTypeDef res = HAL_DAC_Start_DMA(&hdac2, DAC_CHANNEL_1, (uint32_t*)audio, SAMPLE_SIZE, DAC_ALIGN_12B_L);
 
     //__asm("bkpt");
-    for (int i = 0; i < 32; ++i)
+    for (int i = 0; i < 150; ++i)
     {
       //HAL_DAC_SetValue(&hdac2, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave_array[i]);
 
@@ -199,6 +200,12 @@ int main(void)
         __asm("nop");
       }
     }
+    if (flip) {
+      pwm_lut[ResetSequenceLength + 5] = one_;
+    } else {
+      pwm_lut[ResetSequenceLength + 5] = zero;
+    }
+    flip = !flip;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
